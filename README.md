@@ -1,9 +1,26 @@
 # Opus Swarm
 
 **Production-Grade Autonomous Enterprise Operations Agent Swarm**
--
+
 Opus Swarm is a self-evaluating, production-hardened multi-agent AI system
 for enterprise business process automation.
+
+---
+
+## Build Status
+
+| Phase | Domain | Status |
+|-------|--------|--------|
+| Phase 1 | Git / Version Control | ✅ Complete |
+| Phase 2 | Project Structure and Build Systems | ✅ Complete |
+| Phase 3 | Environment Variables and Secrets | 🔄 In Progress |
+| Phase 4 | Logging and Observability | ⏳ Upcoming |
+| Phase 5 | Database Schemas and Migrations | ⏳ Upcoming |
+| Phase 6 | Backend Routing and APIs | ⏳ Upcoming |
+| Phase 7 | Agent Orchestration | ⏳ Upcoming |
+| Phase 8 | Authentication and Authorization | ⏳ Upcoming |
+| Phase 9 | Frontend State and Routing | ⏳ Upcoming |
+| Phase 10 | Containerization and Deployment | ⏳ Upcoming |
 
 ---
 
@@ -68,47 +85,41 @@ Dashboard         → React frontend
 
 ---
 
+## Project Structure
+
+```
+opus-swarm/
+├── agents/          # Agent definitions (Supervisor, Planner, Executor, etc.)
+├── api/             # FastAPI routes and request handlers
+├── core/            # Shared config, logging, and base utilities
+│   └── config.py    # ✅ Settings loader — reads .env into typed config
+├── memory/          # PostgreSQL, Redis, and vector DB clients
+├── tools/           # Agent-callable tools (web search, file ops, APIs)
+├── dashboard/       # React frontend
+├── tests/           # Pytest test suite
+├── docs/            # Architecture diagrams and documentation
+├── scripts/         # Dev and ops utility scripts
+├── infra/           # Docker, Kubernetes, Terraform configs
+├── pyproject.toml   # ✅ Project identity and tool configuration
+├── requirements.txt # ✅ Pinned Python dependencies
+└── .env.example     # ✅ Environment variable template
+```
+
+---
+
 ## Engineering Domains Covered
 
 1. Git / Version Control
 2. Project Structure and Build Systems
 3. Environment Variables and Secrets
-4. Database Schemas and Migrations
-5. Backend Routing and APIs
-6. Authentication and Authorization
-7. Frontend State and Routing
-8. Styling Systems
-9. Server Configuration
-10. Docker and Containerization
+4. Logging and Observability
+5. Database Schemas and Migrations
+6. Backend Routing and APIs
+7. Authentication and Authorization
+8. Frontend State and Routing
+9. Styling Systems
+10. Containerization and Deployment
 11. CI/CD Pipelines
-12. Testing
-13. Logging and Error Tracking
-14. Performance Optimization
-15. Security Hardening
-16. Deployment and Hosting
-17. Monitoring and Observability
-18. Background Jobs and Queues
-19. Database Connections and Pooling
-20. Type Systems and Code Quality
-21. API Documentation and Contracts
-22. File Storage and Uploads
-23. Caching Strategy
-24. Backup and Disaster Recovery
-25. Debugging and Troubleshooting
-
----
-
-## Project Status
-
-- [ ] Phase 1: Foundation, Structure, Git, Environment
-- [ ] Phase 2: Data Models and Database Schema
-- [ ] Phase 3: FastAPI Backend and Core Agent API
-- [ ] Phase 4: LangGraph Multi-Agent Orchestration
-- [ ] Phase 5: Verifier, Researcher, Reporter + Self-Correction
-- [ ] Phase 6: Auth, Security, Docker, CI/CD
-- [ ] Phase 7: React Dashboard, Redis, Vector Memory
-- [ ] Phase 8: Kubernetes, Monitoring, Terraform
-
----
-
-*Built with LoWisa Engineering Mentorship*
+12. Monitoring and Alerting
+13. Agent Orchestration Patterns
+14. Testing Strategy
