@@ -15,7 +15,7 @@ for enterprise business process automation.
 | Phase 2 | Project Structure and Build Systems | ✅ Complete |
 | Phase 3 | Environment Variables and Secrets | ✅ Complete |
 | Phase 4 | Logging and Observability | ✅ Complete |
-| Phase 5 | Database Schemas and Migrations | 🔄 In Progress |
+| Phase 5 | Database Schemas and Migrations | ✅ Complete |
 | Phase 6 | Backend Routing and APIs | ⏳ Upcoming |
 | Phase 7 | Agent Orchestration | ⏳ Upcoming |
 | Phase 8 | Authentication and Authorization | ⏳ Upcoming |
@@ -45,43 +45,41 @@ and uses a coordinated team of AI agents to:
 ```
 
 The Supervisor agent receives this task, the Planner breaks it into steps,
-Executor agents run each step, the Verifier checks every output,
-and the Reporter assembles the final result.
+Executor agents run each step, and the Verifier confirms the outputs before
+the Reporter generates the final summary.
 
 ---
 
-## System Architecture
+## Architecture
 
 ```
-Ingest Layer      → emails, PDFs, APIs, databases
-Orchestration     → LangGraph stateful multi-agent graph
-Agent Layer       → Supervisor / Planner / Executor / Verifier / Researcher / Reporter
-Memory Layer      → PostgreSQL + Redis + Vector DB
-Audit Layer       → structured logging, decision trail, human escalation
-Observability     → Prometheus, Grafana, OpenTelemetry
-Deployment        → Docker, Kubernetes, GitHub Actions CI/CD
-Dashboard         → React frontend
+External Input
+      │
+      ▼
+┌─────────────┐
+│  Supervisor │  ← Receives task, delegates work
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│   Planner   │  ← Breaks task into steps
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│  Executor   │  ← Runs each step with tools
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│  Verifier   │  ← Checks output quality
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│  Reporter   │  ← Generates final output
+└─────────────┘
 ```
-
----
-
-## Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Language | Python 3.11+ |
-| API Framework | FastAPI |
-| Agent Orchestration | LangGraph |
-| Structured DB | PostgreSQL |
-| Cache / Queue | Redis |
-| Vector Memory | ChromaDB (local) → Pinecone (cloud) |
-| Containerization | Docker + Docker Compose |
-| Orchestration | Kubernetes |
-| CI/CD | GitHub Actions |
-| Frontend | React |
-| Monitoring | Prometheus + Grafana |
-| Error Tracking | Sentry |
-| Eval Tracking | MLflow |
 
 ---
 
@@ -91,35 +89,52 @@ Dashboard         → React frontend
 opus-swarm/
 ├── agents/          # Agent definitions (Supervisor, Planner, Executor, etc.)
 ├── api/             # FastAPI routes and request handlers
-├── core/            # Shared config, logging, and base utilities
-│   └── config.py    # ✅ Settings loader — reads .env into typed config
-├── memory/          # PostgreSQL, Redis, and vector DB clients
-├── tools/           # Agent-callable tools (web search, file ops, APIs)
-├── dashboard/       # React frontend
-├── tests/           # Pytest test suite
-├── docs/            # Architecture diagrams and documentation
-├── scripts/         # Dev and ops utility scripts
-├── infra/           # Docker, Kubernetes, Terraform configs
-├── pyproject.toml   # ✅ Project identity and tool configuration
-├── requirements.txt # ✅ Pinned Python dependencies
-└── .env.example     # ✅ Environment variable template
+├── core/            # Shared config, logging, database models
+├── dashboard/       # Frontend UI (Phase 9)
+├── docs/            # Architecture and API documentation
+├── infra/           # Docker, deployment configs
+├── tests/           # All test files
+├── main.py          # Application entry point
+├── requirements.txt # Python dependencies
+└── pyproject.toml   # Build and tool configuration
 ```
 
 ---
 
-## Engineering Domains Covered
+## Phase Progress
 
-1. Git / Version Control
-2. Project Structure and Build Systems
-3. Environment Variables and Secrets
-4. Logging and Observability
-5. Database Schemas and Migrations
-6. Backend Routing and APIs
-7. Authentication and Authorization
-8. Frontend State and Routing
-9. Styling Systems
-10. Containerization and Deployment
-11. CI/CD Pipelines
-12. Monitoring and Alerting
-13. Agent Orchestration Patterns
-14. Testing Strategy
+### ✅ Phase 1 — Git / Version Control
+- Git repository initialized
+- `.gitignore` configured for Python, secrets, IDE files
+- Initial commit established
+
+### ✅ Phase 2 — Project Structure and Build Systems
+- Folder structure created: agents/, api/, core/, dashboard/, docs/, infra/, tests/
+- `pyproject.toml` configured with pytest, black, ruff, mypy
+- `requirements.txt` pinned with all production dependencies
+
+### ✅ Phase 3 — Environment Variables and Secrets
+- `.env.example` created with all required keys documented
+- `core/config.py` implemented with Pydantic Settings
+- `.env` excluded from Git via `.gitignore`
+
+### ✅ Phase 4 — Logging and Observability
+- `core/logging.py` implemented with structlog
+- JSON-structured logging with context binding
+- 3 tests passing
+
+### ✅ Phase 5 — Database Schemas and Migrations
+- `core/database.py` — async SQLAlchemy engine and session factory
+- `core/models.py` — Task and AgentLog table definitions
+- `tests/test_models.py` — 8 tests passing
+- Alembic configured for database migrations
+
+### ⏳ Phase 6 — Backend Routing and APIs
+- FastAPI route structure
+- Health check endpoint
+- Task CRUD endpoints
+
+### ⏳ Phase 7 — Agent Orchestration
+### ⏳ Phase 8 — Authentication and Authorization
+### ⏳ Phase 9 — Frontend State and Routing
+### ⏳ Phase 10 — Containerization and Deployment
